@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+    <form method="post" action=" http://todo.html"></form>
+</head>
+<body>
+    <div>
+    <div class="container" id="loginform">
+        <h2>Login</h2>
+            <div class="input">
+                <label for="emailInput">Email</label>
+                <input type="email" id="emailInput" name="email">
+                <div id="emailErrorMessage" class="error-message" style="display: none;">Please enter your email Id</div>
+            </div>
+            <div class="input">
+                <label class="textlabel" for="passwordInput">Password</label>
+                <input type="password" id="passwordInput" name="password">
+                <div id="passwordErrorMessage" class="error-message" style="display: none;">Please enter your password</div>
+            </div>
+            <!-- <div class="tick">
+                <input type="checkbox" name="remember" id="remember" value="remember">
+                <label for="remember">Remember me</label>
+            </div> -->
+            <div class="btn">
+                <button type="submit" id="loginbutton">Login now</button>
+            </div>
+            <div class="link">
+                <a href="forgotpassword.html" id="forgotPasswordLink">forgot password?</a>  
+                <a href="https://www.facebook.com/register" id="createAccountLink">Create account</a>  
+            </div>
+    </div>
+    </div>
+    <div>
+        <div class="container" id="quotes">
+            <p class="para1"><b>Welcome!</b></p>
+            
+            <p class="para2"><i>"Keep your face always toward the sunshine, and shadows will fall behind you."
+                — Walt Whitman</i></p>
+        </div>
+       </div>
+
+       <script type="module"  src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+html,body{
+    background: url("/winter.jpg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+}
+#quotes{
+    text-align: center;
+    color: white;
+    padding: 10px 20px 10px;
+    width: 70%;
+    transform: translateY(-80%);
+}
+.para1{
+    display: flex;
+    transform: translateX(30%);
+    /* transform: translateY(50%); */
+    font-size: xxx-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.para2{
+    display: flex;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transform: translateY(40%);
+    transform:translateX(5%);
+}
+#loginform{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:50%;
+    margin: 30px 150px;
+    padding: 10px 20px 30px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size:100% ;
+}
+#loginform h2{
+    text-align: center;
+    color:ivory;
+}
+#loginform .textlabel{
+    display: flex;
+}
+.input input{
+    width: 100%;
+    font-size: 100%;
+    border: 1px antiquewhite;
+    box-shadow: 2px;
+    border-radius:2px;
+    padding: 4px 4px;
+    box-sizing: border-box;
+    margin: 2px 0px 15px;
+}
+input:focus{
+    background-color:rgb(198, 198, 243);
+}
+.btn{
+    text-align: center;
+}
+button{
+    background-color:rgb(199, 199, 240);
+    font-size: 100%;
+    color:black;
+    margin: 15px 0px 10px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid rgb(124, 124, 148);
+    box-shadow: 2px;
+    cursor: pointer;
+}
+/* Style for the disabled state of the button */
+button.disabled {
+    background-color: #ccc; /* Change background color to a lighter shade */
+    color: #666; /* Change text color to a darker shade */
+    cursor: not-allowed; /* Change cursor to indicate non-interactivity */
+    opacity: 0.7; /* Reduce opacity to visually indicate disabled state */
+}
+
+#forgotPasswordLink{
+    color: lightgrey;
+    text-align: center;
+}
+
+#createAccountLink{
+    flex: 1;
+    color: lightgrey;
+    text-align: right; 
+    width: 310px;
+    margin-left: 95px; 
+    transform: translateY(-100%);  
+}
+
+/* Style for the password recovery modal */
+#passwordRecoveryModal {
+    display: none; /* Hide the modal by default */
+    position: fixed;
+    top: 50%; /* Center the modal vertically */
+    left: 50%; /* Center the modal horizontally */
+    transform: translate(-50%, -50%); /* Center the modal precisely */
+    background-color: #fff; /* Background color for the modal */
+    padding: 20px; /* Add padding inside the modal */
+    border: 1px solid #ccc; /* Add border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    /* z-index: 999; Ensure the modal appears above other content */
+    color: black;
+}
+
+/* Style for the content inside the password recovery modal */
+#passwordRecoveryModal h2 {
+    margin-top: 0; /* Remove default margin for the heading */
+}
+
+#passwordRecoveryModal p {
+    margin-bottom: 10px; /* Add margin below paragraphs */
+}
+
+/* Close button style (if applicable) */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.input-placeholder{
+    height: 20px;
+}
+#submit-btn{
+    width: 50%;
+    height: 35px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+#errorMessage{
+    color: red;
+}
