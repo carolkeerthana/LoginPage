@@ -4,7 +4,7 @@
   "description": "",
   "main": "login.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

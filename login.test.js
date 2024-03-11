@@ -7,28 +7,22 @@ require('@testing-library/jest-dom');
 
 const { validateEmail, validatePassword,updateLoginButtonState, login, displayPasswordRecoveryModal, redirectToFacebookRegistration,isErrorMessageDisplayed,focusEmailInput,} = require('./login');
 const loginButton = document.getElementById('loginbutton');
-const emailInput = document.querySelector('#emailInput');
-const passwordInput = document.querySelector('#passwordInput');
+let emailInput = document.querySelector('#emailInput');
+let passwordInput = document.querySelector('#passwordInput');
 const container =require('./login');
 const exp = require('constants');
-
-
 
 delete global.window.location;
 global.window = Object.create(window);
 
 // Mock the function that sets the window location
 global.window.location = {
-    href: '',
+    href: './signup.html',
 };
 global.alert = jest.fn();
 
 delete window.location;
 window.location = { href: '' };
-
-const mockRedirect = jest.fn(); // Mock redirect function
-// Mock error display callback
-const mockErrorDisplay = jest.fn();
      
 describe('Login component test', ()=>{
 
@@ -41,6 +35,20 @@ describe('Login component test', ()=>{
     const containers = document.querySelectorAll('.container');
     expect(containers.length).toBe(2);
   })
+
+  test('check whether welcome text is present in the container', () => {
+    const pText = document.querySelector('p');
+    console.log(pText.textContent)
+    expect(pText.textContent).toMatch(/Welcome!/);
+  });
+
+  test('Text is present in the container', () => {
+    const pElement = document.querySelector('p.para2#msg');
+    const iElement = pElement.querySelector('i');
+    const iElementTextContent = iElement.textContent.trim();
+    const expectedText = "Keep your face always toward the sunshine, and shadows will fall behind you. — Walt Whitman";
+    expect(iElementTextContent).toEqual(expectedText.trim());
+});
 
   test('check whether login text is present in the container', () => {
     const h2Text = document.querySelector('h2');
@@ -183,7 +191,6 @@ describe('Login button enabled or disabled', ()=>{
   });
 
   test('snapshot of disabled login button', () => {
-    // Set up DOM and call updateLoginButtonState to disable the button
     emailInput.value = '';
     passwordInput.value = '';
     updateLoginButtonState();
@@ -197,7 +204,6 @@ describe('Login button enabled or disabled', ()=>{
     Object.keys(buttonStyles).forEach((styleName) => {
       buttonSnapshot[styleName] = buttonStyles[styleName];
     });
-
     expect(buttonSnapshot).toMatchSnapshot();
   });
 
@@ -219,8 +225,6 @@ describe('Login button enabled or disabled', ()=>{
   
     expect(buttonSnapshot).toMatchSnapshot();
   });
-  
-
 });
 
 // Test email validation
@@ -258,19 +262,14 @@ describe('email validation', ()=>{
         expect(validatePassword('Abcdefgh')).toBe(false);
       });
   })
-
-// describe('checking error msg if fields are empty', ()=>{
-//   test('should display error message when both email and password fields are empty', () => {
-//     // Call login function with empty email and password
-//     login('', '', mockRedirect, mockErrorDisplay);
-
-//     // Check if error message is displayed
-//     expect(mockErrorDisplay).toHaveBeenCalledWith('Please enter your email and password');
-// });
-// })
-
-// Scenario: Both email and password are correct
-test('Both email and password correct should call redirect callback with todo', () => {
+  
+  describe('checkEmail function', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    
+    // Scenario: Both email and password are correct
+  test('Both email and password correct should call redirect callback with todo', () => {
     login('keerthana0497@gmail.com', 'Abcd1234');
     expect(global.window.location.href).toBe('./todo.html');
   });
@@ -293,6 +292,8 @@ test('Both email and password correct should call redirect callback with todo', 
     expect(global.alert).toHaveBeenCalledWith('Incorrect email and password');
   });
 
+});
+
   describe('HTML Elements', () => {
     beforeEach(() => {
         document.documentElement.innerHTML = html.toString();
@@ -304,69 +305,35 @@ test('Both email and password correct should call redirect callback with todo', 
     expect(href).toBe('forgotpassword.html');
 });
 
-test('should redirect to a specific page when the "Create account" link is clicked', ()=>{   
+  test('should redirect to a specific page when the "Create account" link is clicked', ()=>{   
   const createAccountLink = document.getElementById('createAccountLink');
   const href = createAccountLink.getAttribute('href');
   expect(href).toContain('https://www.facebook.com/register');
 });
 });
 
-
-
-// describe('Login Button Event Listener', () => {
-//   test('login button should be enabled after filling email and password fields', () => {
-//     // Mock the input values for email and password
-//     const emailInput = document.getElementById('emailInput');
-//     const passwordInput = document.getElementById('passwordInput');
-//     emailInput.value = 'test@example.com';
-//     passwordInput.value = 'password123';
-
-//     // Trigger input events on email and password fields
-//     emailInput.dispatchEvent(new Event('input'));
-//     passwordInput.dispatchEvent(new Event('input'));
-
-//     // Retrieve the login button
-//     const loginButton = document.querySelector('.btn button');
-
-//     // Enable the login button (since it should initially be disabled)
-//     loginButton.disabled = false;
-
-//     // Assert that the button is initially disabled
-//     expect(loginButton.disabled).toBe(true);
-
-//     // Trigger a click event on the login button
-//     loginButton.click();
-
-//     // Now the login button should be enabled
-//     expect(loginButton.disabled).toBe(false);
-// });
-
-// });
-
-// Import necessary functions and modules
-const { JSDOM } = require('jsdom');
-
-describe('Login Button Click Event', () => {
-  let window;
-  let loginButton;
-
-  beforeEach(() => {
-    const dom = new JSDOM('<!DOCTYPE html><button id="loginButton">Login</button>');
-    window = dom.window;
-    global.document = window.document;
-    loginButton = document.getElementById('loginButton');
+describe('login_button function', () => {
+  afterEach(() => {
+      document.documentElement.innerHTML = html.toString();
+      global.window.location.href = '';
   });
+test('should navigate by valid credentials', () => {
+  global.document.dispatchEvent(new Event('DOMContentLoaded'));
+  emailInput ='keerthana0497@gmail.com';
+  passwordInput='Abcd1234';
+  const event = new window.Event('click');
+  loginButton.dispatchEvent(event);
+  // login('keerthana0497@gmail.com', 'Abcd1234');
+  expect(global.window.location.href).toBe('./todo.html');
+});
+test('invalid credentials', () => {
+  global.document.dispatchEvent(new Event('DOMContentLoaded'));
+  emailInput ='keerthana049gmail.com';
+  passwordInput='bd34';
+  const event = new window.Event('click');
+  loginButton.dispatchEvent(event);
+  // login('keerthana0497@gmail.com', 'Abcd1234');
+  expect(global.alert).toHaveBeenCalledWith('Incorrect email and password');
 
-  test('Login button click should call login function with email and password', () => {
-    // Mock email and password input values
-    document.getElementById('emailInput').value = 'keerthana0497@gmail.com';
-    document.getElementById('passwordInput').value = 'Abcd1234';
-
-    // Simulate click event on the login button
-    const event = new window.Event('click');
-    loginButton.dispatchEvent(event);
-
-    // Verify that the login function is called with correct credentials
-    expect(login).toHaveBeenCalledWith('keerthana0497@gmail.com', 'Abcd1234');
-  });
+});
 });
