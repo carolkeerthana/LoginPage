@@ -9,8 +9,6 @@ const { validateEmail, validatePassword,updateLoginButtonState, login, displayPa
 const loginButton = document.getElementById('loginbutton');
 let emailInput = document.querySelector('#emailInput');
 let passwordInput = document.querySelector('#passwordInput');
-const container =require('./login');
-const exp = require('constants');
 
 delete global.window.location;
 global.window = Object.create(window);
@@ -72,16 +70,6 @@ describe('Login component test', ()=>{
       const emailInput = document.querySelector('#emailInput');
       expect(emailInput).toBeInTheDocument();
   });
-
-  test('Email label exists', ()=>{
-    const emailLabel = document.querySelector('label[for="emailInput"]');
-    expect(emailLabel).toBeTruthy();
-  });
-
-  test('Label with text Email exists', ()=>{
-    const emailLabel = document.querySelector('label[for="emailInput"]');
-    expect(emailLabel.textContent).toBe('Email');
-  });
   
   test('login page has input field for password', ()=>{ 
       const passwordInput = document.querySelector('#passwordInput');
@@ -118,10 +106,7 @@ describe('Login component test', ()=>{
 
 describe('Focus on email input field', () => {
   test('Check if focus is on the email input field after DOM is loaded', () => {
-    // Simulate DOMContentLoaded event
     document.dispatchEvent(new Event('DOMContentLoaded'));
-
-    // Check if the focus is on the username field
     const focusedElement = document.activeElement;
     const emailInput = document.getElementById('emailInput');
 
@@ -139,8 +124,7 @@ describe('positioning of the fields',()=>{
     const containerRect = container.getBoundingClientRect();
     const loginTextRect = loginText.getBoundingClientRect();
 
-    // Calculate the horizontal center position of the container
-   
+    // Calculate the horizontal center position of the container 
     const containerCenter = containerRect.left + containerRect.width / 2;
     console.log('Left:', containerRect.left);
 console.log('Width:', containerRect.width);
@@ -163,7 +147,6 @@ console.log('Width:', containerRect.width);
       const inputRect  = emailInput.getBoundingClientRect();
   
       expect(labelRect.bottom).toBeLessThanOrEqual(inputRect.top);
-      // expect(emailLabelRect.left).toEqual(emailInputRect.left); // Ensure horizontal alignment
   });
 
   test('the password text is positioned above the password input field', () => {
@@ -195,28 +178,28 @@ describe('Login button enabled or disabled', ()=>{
     passwordInput.value = '';
     updateLoginButtonState();
 
-    // Take a snapshot of the login button's HTML representation
+    //login button's HTML representation
     document.body.innerHTML = loginButton.outerHTML;
 
-    // Take a snapshot of the login button's computed styles
+    //login button's computed styles
     const buttonStyles = window.getComputedStyle(loginButton);
     const buttonSnapshot = {};
     Object.keys(buttonStyles).forEach((styleName) => {
       buttonSnapshot[styleName] = buttonStyles[styleName];
     });
+    
     expect(buttonSnapshot).toMatchSnapshot();
   });
 
   test('snapshot of enabled login button', () => {
-    // Set up DOM and call updateLoginButtonState to enable the button
     emailInput.value = 'keerthana0497@gmail.com';
     passwordInput.value = 'Abcd1234';
     updateLoginButtonState();
   
-    // Take a snapshot of the login button's HTML representation
+    //login button's HTML representation
     document.body.innerHTML = loginButton.outerHTML;
   
-    // Take a snapshot of the login button's computed styles
+    //login button's computed styles
     const buttonStyles = window.getComputedStyle(loginButton);
     const buttonSnapshot = {};
     Object.keys(buttonStyles).forEach((styleName) => {

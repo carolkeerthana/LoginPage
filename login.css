@@ -1,4 +1,6 @@
-html,body{
+body.background-image{
+    margin: 0;
+    padding: 0;
     background: url("/winter.jpg");
     background-repeat: no-repeat;
     background-size: cover ;
